@@ -63,9 +63,8 @@
 							<td>${tempCourse.enrollment}</td>
 							<td>
 								<!-- display the update link --> <a href="${updateLink}">Update</a>
-								|<!-- display the update link --> <a href="${detailLink}">Course's
-									students</a>| <a href="${deleteLink}"
-								onclick="if (!(confirm('Are you sure you want to delete this course?'))) return false">Delete</a>
+								|<!-- display the update link --> <a href="${detailLink}">Course's students</a>
+								| <a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this course?'))) return false">Delete</a>
 							</td>
 						</tr>
 					</c:forEach>
