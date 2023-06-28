@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
 	public User getUser(int userId) {
 		return userDao.getUser(userId);
 	}
+
+	@Override
+	public void deleteUser(int userId) {
+		userDao.deleteUser(userId);		
+	}
 }

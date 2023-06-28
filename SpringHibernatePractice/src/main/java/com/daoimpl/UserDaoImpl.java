@@ -54,4 +54,13 @@ public class UserDaoImpl implements UserDao {
 		User user = session.get(User.class, userId);
 		return user;
 	}
+
+	@Override
+	public void deleteUser(int userId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "delete from User where userId = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", userId);
+		query.executeUpdate();
+	}
 }

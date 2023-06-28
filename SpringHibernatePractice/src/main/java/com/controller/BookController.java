@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Book;
 import com.entity.User;
@@ -49,6 +50,12 @@ public class BookController {
 		User user = userService.getUser(userId);
 		book.setUser(user);
 		bookService.saveBook(book);
+		return "redirect:/book/" + userId + "/list-book";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteBook(@RequestParam("bookId") int bookId, @RequestParam("userId") int userId) {
+		bookService.deleteBook(bookId);
 		return "redirect:/book/" + userId + "/list-book";
 	}
 }

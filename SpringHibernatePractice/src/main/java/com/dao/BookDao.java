@@ -4,4 +4,5 @@ import com.entity.Book;
 
 public interface BookDao {
 	public void saveBook(Book book);
+	public void deleteBook(int id);
 }
