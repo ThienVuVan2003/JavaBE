@@ -3,15 +3,16 @@ package com.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,21 +57,18 @@ public class UserController {
 
 	@GetMapping("/addUser")
 	public String addUser(ModelMap model) {
-		UserDTO user = new UserDTO();
+		User user = new User();
 		model.addAttribute("user", user);
 		return "addUser";
 	}
 
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("user") User user, ModelMap model) {
-		userService.saveUser(user);
-		List<User> list = userService.getUser();
-		List<UserDTO> listDto = new ArrayList<UserDTO>();
-		for (User u : list) {
-			listDto.add(new UserDTO(u.getUserId(), u.getUserName(), u.getPassword()));
+	public String saveUser(@Valid @ModelAttribute("user") User user, ModelMap model, BindingResult result) {
+		if(result.hasErrors()) {
+			return "addUser";
 		}
-		model.addAttribute("users", listDto);
-		return "list-user";
+		userService.saveUser(user);
+		return "redirect:/user/list-user";
 	}
 	
 	@GetMapping("/detail/{userId}")
@@ -79,9 +77,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/delete")
-	public String deleteUser(@RequestParam("userId") int id) {
-		userService.deleteUser(id);
-		return "redirect:/user/list-user";
+	public String deleteUser(@RequestParam("userId") int userId) {
+		return "redirect:/book/" + userId + "/delete";
 	}
 		
 }

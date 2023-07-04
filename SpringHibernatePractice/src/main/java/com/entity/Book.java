@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "books")
@@ -20,6 +21,7 @@ public class Book {
 	private int bookId;
 
 	@Column(name = "book_name")
+	@NotNull(message = "is require")
 	private String bookName;
 
 	@ManyToOne(cascade = CascadeType.ALL)

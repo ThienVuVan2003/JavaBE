@@ -33,4 +33,13 @@ public class BookDaoImpl implements BookDao {
 		query.executeUpdate();
 	}
 
+	@Override
+	public void deleteBookUser(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "delete from Book where user.userId = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		query.executeUpdate();
+	}
+
 }
