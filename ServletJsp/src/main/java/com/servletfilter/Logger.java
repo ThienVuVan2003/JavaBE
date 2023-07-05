@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = { "/*" }) // filter all resquest;
+//@WebFilter(urlPatterns = { "/*" }) // filter all resquest;
 public class Logger implements Filter {
 
 	@Override
